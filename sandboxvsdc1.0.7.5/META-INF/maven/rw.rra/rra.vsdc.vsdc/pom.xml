@@ -1,0 +1,212 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>rw.rra</groupId>
+		<artifactId>rra.vsdc.main</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>rra.vsdc.main</relativePath>
+	</parent>
+	<artifactId>rra.vsdc.vsdc</artifactId>
+	<packaging>war</packaging>
+	<name>rra.vsdc.vsdc</name>
+	<url>http://maven.apache.org</url>
+	<description>zra vsdc</description>
+
+
+	<properties>
+		<start-class>ebm.vsdc.Application</start-class>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<pjtTarget>local</pjtTarget>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>rw.rra</groupId>
+			<artifactId>rra.vsdc.skmm</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+		
+			<!-- SQLite JDBC driver -->
+	    <dependency>
+	        <groupId>org.xerial</groupId>
+	        <artifactId>sqlite-jdbc</artifactId>
+	    </dependency>
+	
+	    <!-- Spring Data JPA -->
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-data-jpa</artifactId>
+	    </dependency>
+	    
+	    <!-- Spring Boot Starter JDBC -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-jdbc</artifactId>
+    </dependency>
+	</dependencies>
+
+	<build>
+
+		<finalName>zraVsdc_v1</finalName>
+
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+
+				<targetPath>${project.build.outputDirectory}</targetPath>
+				<includes>
+					<include>application.properties</include>
+				</includes>
+			</resource>
+		</resources>
+
+
+		<plugins>
+
+			<!-- With Dependencies Jar -->
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-assembly-plugin</artifactId>
+				<configuration> <descriptorRefs> <descriptorRef>jar-with-dependencies</descriptorRef>
+				</descriptorRefs> <archive> <manifest> <mainClass>ebm.vsdc.Application</mainClass>
+				</manifest> </archive> </configuration> <executions> <execution> <id>make-assembly</id>
+				<phase>package</phase> <goals> <goal>single</goal> </goals> </execution>
+				</executions> </plugin> -->
+
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+
+				<!--
+				<configuration>
+					<fork>true</fork>
+					<mainClass>${start-class}</mainClass>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.2-beta-5</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<mainClass>ebm.vsdc.Application</mainClass>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+				<executions>
+					<execution>
+						<id>assemble-all</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+				-->
+
+			</plugin>
+
+
+			<!-- <plugin> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-maven-plugin</artifactId>
+				<executions> <execution> <goals> <goal>repackage</goal> </goals> <configuration>
+				<classifier>exec</classifier> </configuration> </execution> </executions>
+				</plugin> -->
+
+
+			<!-- <plugin> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.1.4.RELEASE</version> <executions> <execution> <id>repackage</id>
+				<goals> <goal>repackage</goal> </goals> <configuration> <classifier>exec</classifier>
+				</configuration> </execution> </executions> </plugin> -->
+
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-jar-plugin</artifactId>
+				<executions> <execution> <goals> <goal>jar</goal> </goals> <phase>package</phase>
+				<configuration> <classifier>task</classifier> </configuration> </execution>
+				</executions> </plugin> <plugin> <groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId> <executions> <execution>
+				<id>repackage</id> <goals> <goal>repackage</goal> </goals> <configuration>
+				<classifier>task</classifier> </configuration> </execution> </executions>
+				</plugin> -->
+
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-jar-plugin</artifactId>
+				<executions> <execution> <id>default-jar</id> <configuration> <classifier>task</classifier>
+				</configuration> </execution> </executions> </plugin> <plugin> <groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId> <executions> <execution>
+				<id>repackage</id> <configuration> <classifier>task</classifier> </configuration>
+				</execution> </executions> </plugin> -->
+
+		</plugins>
+
+	</build>
+
+	<profiles>
+
+		<profile>
+			<id>local</id>
+			<properties>
+				<pjtTarget>local</pjtTarget>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>jsdev</id>
+			<properties>
+				<pjtTarget>jsdev</pjtTarget>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>jstest</id>
+			<properties>
+				<pjtTarget>jstest</pjtTarget>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>dev</id>
+			<properties>
+				<pjtTarget>dev</pjtTarget>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>oper</id>
+			<properties>
+				<pjtTarget>oper</pjtTarget>
+			</properties>
+		</profile>
+
+	</profiles>
+</project>
